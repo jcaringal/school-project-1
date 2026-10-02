@@ -1,13 +1,12 @@
 import pygame
 import sys
-import random  # Required to generate random positions
+import random  
 import asyncio
 
 pygame.init()
 
 width, height = 800, 600
 screen = pygame.display.set_mode((width, height))
-score_font = pygame.font.Font(None, 35)
 pygame.display.set_caption("Platformer with Coins")
 clock = pygame.time.Clock()
 
@@ -17,7 +16,8 @@ async def main():
 	blue = (0, 122, 255)
 	yellow = (255, 223, 0)
 
-  player_image = pygame.image.load("assets/player.png")
+  player_image = pygame.image.load("assets/player.png").convert_alpha()
+	player_image = 
   player_rect = pygame.Rect(380, 100, 40, 40)
   player_vel_x = 0
   player_vel_y = 0
@@ -63,8 +63,11 @@ async def main():
     	player_rect.x += player_vel_x
     	if player_rect.left < 0: player_rect.left = 0
     	if player_rect.right > width: player_rect.right = width
+
+			player_dy += gravity
     	player_rect.y += player_vel_y
     	is_grounded = False  
+
     		for platform in platforms:
         		if player_rect.colliderect(platform):
             		if player_vel_y > 0:  # Falling down
@@ -94,7 +97,8 @@ async def main():
         pygame.draw.rect(screen, red, player_rect)
         screen.blit(player_image, player_rect)
 
-			  score_surface = score_font.render(f"Score: {score}", True, (255,255,255))
+			  font = pygame.font.Font(None, 50)
+        text_surface = font.render("score: " + str(score), False, (255, 255, 255))
 			  screen.blit(text_surface, (20, 20))
 
     		pygame.display.flip()
