@@ -5,16 +5,17 @@ import asyncio
 
 pygame.init()
 
-WIDTH, HEIGHT = 800, 600
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+width, height = 800, 600
+screen = pygame.display.set_mode((width, height))
+score_font = pygame.font.Font(None, 35)
 pygame.display.set_caption("Platformer with Coins")
 clock = pygame.time.Clock()
 
 async def main():
-  BACKGROUND = (30, 30, 40)
-  RED = (255, 0, 0)
-  BLUE = (0, 122, 255)
-  YELLOW = (255, 223, 0)
+  background = (30, 30, 40)
+	red = (255, 0, 0)
+	blue = (0, 122, 255)
+	yellow = (255, 223, 0)
 
   player_image = pygame.image.load("assets/player.png")
   player_rect = pygame.Rect(380, 100, 40, 40)
@@ -24,8 +25,8 @@ async def main():
   doubleJump = 1
   score = 0
 
-  GRAVITY = 0.8
-  JUMP_STRENGTH = -25
+  gravity = 0.8
+  jumppower = -25
   is_grounded = False  
 
   platforms = [
@@ -54,16 +55,16 @@ async def main():
     	if keys[pygame.K_RIGHT]:
         	player_vel_x = player_speed
     	if keys[pygame.K_UP] and is_grounded:
-        	player_vel_y = JUMP_STRENGTH
+        	player_vel_y = jumppower
         	is_grounded = False
 			elif keys[pygame.K_UP] and doubleJump == 1:
-				player_vel_y = JUMP_STRENGTH
+				player_vel_y = jumppower
 				doubleJump -= 1
 
-    	player_vel_y += GRAVITY
+    	player_vel_y += gravity
     	player_rect.x += player_vel_x
     	if player_rect.left < 0: player_rect.left = 0
-    	if player_rect.right > WIDTH: player_rect.right = WIDTH
+    	if player_rect.right > width: player_rect.right = width
     	player_rect.y += player_vel_y
     	is_grounded = False  
     		for platform in platforms:
@@ -85,18 +86,17 @@ async def main():
             cupcakes.remove(cupcake)
 		 		cupcakes.append(pygame.Rect(random.randint(50, 700), random.randint(50, 500), 16, 16))
 				score += 1
-    		screen.fill(BACKGROUND)
+    		screen.fill(background)
     		for platform in platforms:
-        		pygame.draw.rect(screen, BLUE, platform)
+        		pygame.draw.rect(screen, blue, platform)
     		for cupcake in cupcakes:
-        		pygame.draw.rect(screen, YELLOW, cupcake)
+        		pygame.draw.rect(screen, yellow, cupcake)
             screen.blit(cupcake_image, cupcake)
     			
-        pygame.draw.rect(screen, RED, player_rect)
+        pygame.draw.rect(screen, red, player_rect)
         screen.blit(player_image, player_rect)
-			
-			  font = pygame.font.Font(None, 32)
-        text_surface = font.render("Score: " + str(score), True, TEXT_COLOR)
+
+			  score_surface = score_font.render(f"Score: {score}", True, (255,255,255))
 			  screen.blit(text_surface, (20, 20))
 
     		pygame.display.flip()
