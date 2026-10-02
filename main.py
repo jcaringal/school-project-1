@@ -7,7 +7,7 @@ pygame.init()
 
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Platformer with Cupcakes")
+pygame.display.set_caption("Platformer with Coins")
 clock = pygame.time.Clock()
 
 async def main():
@@ -16,6 +16,7 @@ async def main():
   BLUE = (0, 122, 255)
   YELLOW = (255, 223, 0)
 
+  player_image = pygame.image.load("assets/player.png")
   player_rect = pygame.Rect(380, 100, 40, 40)
   player_vel_x = 0
   player_vel_y = 0
@@ -32,7 +33,7 @@ async def main():
     pygame.Rect(100, 400, 250, 20),   
     pygame.Rect(450, 300, 250, 20)    
 ]
-
+  cupcake_image = pygame.image.load("assets/cupcake.png")
   cupcakes = []
   for _ in range(10):
     		cx = random.randint(50, 750)
