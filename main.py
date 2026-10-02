@@ -30,33 +30,31 @@ async def main():
   is_grounded = False  
 
   platforms = [
-    pygame.Rect(0, 550, 800, 50),     
+  	pygame.Rect(0, 550, 800, 50),     
     pygame.Rect(100, 400, 250, 20),   
-    pygame.Rect(450, 300, 250, 20)    
-]
+    pygame.Rect(450, 300, 250, 20)]
+
   cupcake_image = pygame.image.load("assets/cupcake.png")
   cupcakes = []
   for _ in range(10):
-    		cx = random.randint(50, 750)
-    		cy = random.randint(50, 500)
-    		cupcakes.append(pygame.Rect(cx, cy, 16, 16))
+    cx = random.randint(50, 750)
+    cy = random.randint(50, 500)
+    cupcakes.append(pygame.Rect(cx, cy, 16, 16))
 
-
-  running = True
-  while running:
-    for event in pygame.event.get():
-      if event.type == pygame.QUIT:
-        running = False
-           
+	running = True
+  	while running:
+    	for event in pygame.event.get():
+      	if event.type == pygame.QUIT:
+        	running = False 
     	keys = pygame.key.get_pressed()
    		player_vel_x = 0
     	if keys[pygame.K_LEFT]:
-        	player_vel_x = -player_speed
+        player_vel_x = -player_speed
     	if keys[pygame.K_RIGHT]:
-        	player_vel_x = player_speed
+        player_vel_x = player_speed
     	if keys[pygame.K_UP] and is_grounded:
-        	player_vel_y = jumppower
-        	is_grounded = False
+        player_vel_y = jumppower
+        is_grounded = False
 			elif keys[pygame.K_UP] and doubleJump == 1:
 				player_vel_y = jumppower
 				doubleJump -= 1
