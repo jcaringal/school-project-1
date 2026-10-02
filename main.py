@@ -101,5 +101,4 @@ async def main():
     		clock.tick(60)
         await asyncio.sleep(0)
 
-pygame.quit()
 asyncio.run(main())
