@@ -17,7 +17,6 @@ async def main():
 	yellow = (255, 223, 0)
 
   player_image = pygame.image.load("assets/player.png").convert_alpha()
-	player_image = 
   player_rect = pygame.Rect(380, 100, 40, 40)
   player_vel_x = 0
   player_vel_y = 0
@@ -97,12 +96,12 @@ async def main():
         pygame.draw.rect(screen, red, player_rect)
         screen.blit(player_image, player_rect)
 
-			  font = pygame.font.Font(None, 50)
+		font = pygame.font.Font(None, 50)
         text_surface = font.render("score: " + str(score), False, (255, 255, 255))
-			  screen.blit(text_surface, (20, 20))
+		screen.blit(text_surface, (20, 20))
 
-    		pygame.display.flip()
-    		clock.tick(60)
+    	pygame.display.flip()
+    	clock.tick(60)
         await asyncio.sleep(0)
 
 asyncio.run(main())
